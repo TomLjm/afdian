@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>常见问题 · 面翼 MeetsWin</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<aside class="sidenav">
+  <a class="sidenav-logo" href="index.html">
+    <div class="mark">面</div>
+    <div class="name">面翼 MeetsWin</div>
+  </a>
+  <nav class="sidenav-nav">
+    <a class="nav-item" href="index.html"><span class="icon">▦</span>总览</a>
+    <a class="nav-item" href="copilot.html"><span class="icon">🎧</span>面试 Copilot</a>
+    <a class="nav-item" href="resume.html"><span class="icon">📄</span>简历优化</a>
+    <a class="nav-item" href="mock.html"><span class="icon">🎭</span>模拟面试</a>
+    <a class="nav-item" href="records.html"><span class="icon">🗂</span>面试记录</a>
+    <a class="nav-item" href="pricing.html"><span class="icon">💎</span>价格套餐</a>
+    <a class="nav-item" href="download.html"><span class="icon">⬇</span>下载</a>
+    <a class="nav-item" href="docs.html"><span class="icon">📖</span>使用手册</a>
+    <a class="nav-item active" href="faq.html"><span class="icon">❓</span>常见问题</a>
+  </nav>
+  <div class="sidenav-footer">
+    <a class="nav-item" href="https://afdian.com/a/tomljm" target="_blank" rel="noopener"><span class="icon">⚡</span>爱发电主页</a>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="page-head">
+    <div class="crumb">总览 / 常见问题</div>
+    <h1>常见问题</h1>
+    <p>遇到其他问题？通过爱发电私信联系我们。</p>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q"><span>免费试用有什么限制？</span><span>+</span></div>
+    <div class="faq-a">每台新设备首次启动自动领取 30 分钟 AI 服务时长，所有功能都可以体验。同一台电脑重复安装、换账号不会重复领取。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><span>购买后怎么开通？要等激活码吗？</span><span>+</span></div>
+    <div class="faq-a">不需要激活码。在客户端「设置 → 账号与余额」选择档位，跳转爱发电付款，支付完成后自动到账，时长与积分即时显示，可在「刷新余额」查看。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><span>Windows 弹出「未识别的应用」怎么办？</span><span>+</span></div>
+    <div class="faq-a">这是 SmartScreen 提示，因为我们是独立开发者、未购买代码签名证书。点击「更多信息」→「仍要运行」即可正常启动。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><span>支持 Mac 吗？</span><span>+</span></div>
+    <div class="faq-a">目前仅支持 Windows 10 / 11（64 位）。macOS 版本在计划中，会优先服务月卡及以上用户。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><span>我的简历和面试记录会被上传吗？</span><span>+</span></div>
+    <div class="faq-a">面试记录、简历文本默认保存在你本机；只有调用 AI 服务的当下，相关内容会经加密通道发送到我们的服务器以生成回答，服务器不做长期存储、不用于模型训练。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><span>时长 / 积分没用完怎么办？</span><span>+</span></div>
+    <div class="faq-a">充值即到账，余额不过期，用多久扣多久。周卡 600 分钟、月卡 1200 分钟为硬额度（防刷量），额度用完即止，不会自动续费扣款。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><span>能开发票吗？</span><span>+</span></div>
+    <div class="faq-a">通过爱发电平台购买可申请平台代开的电子发票。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q"><span>可以退款吗？</span><span>+</span></div>
+    <div class="faq-a">购买后 7 天内余额未消耗，可联系客服退款；已消耗时长/积分不支持退款。</div>
+  </div>
+
+  <div class="card" style="margin-top:24px">
+    <h3 style="margin-bottom:6px">联系我们</h3>
+    <p>有问题、提建议、商务合作，都可以通过 <a href="https://afdian.com/a/tomljm" target="_blank" rel="noopener" style="color:var(--green)">爱发电主页</a> 的私信功能联系。</p>
+  </div>
+</main>
+
+<script>
+document.querySelectorAll('.faq-q').forEach((q) => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+</script>
+</body>
+</html>
