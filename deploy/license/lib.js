@@ -88,6 +88,36 @@ export function md5Hex(s) {
 export function hmacHex(secret, payload) {
   return crypto.createHmac('sha256', secret).update(payload).digest('hex');
 }
+
+/** 爱发电平台 Webhook 验签公钥（官方文档提供，来自 nonebot-adapter-afdian 内置） */
+const AFDIAN_WEBHOOK_PUBLIC_KEY = `-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwwdaCg1Bt+UKZKs0R54y
+lYnuANma49IpgoOwNmk3a0rhg/PQuhUJ0EOZSowIC44l0K3+fqGns3Ygi4AfmEfS
+4EKbdk1ahSxu7Zkp2rHMt+R9GarQFQkwSS/5x1dYiHNVMiR8oIXDgjmvxuNes2Cr
+8fw9dEF0xNBKdkKgG2qAawcN1nZrdyaKWtPVT9m2Hl0ddOO9thZmVLFOb9NVzgYf
+jEgI+KWX6aY19Ka/ghv/L4t1IXmz9pctablN5S0CRWpJW3Cn0k6zSXgjVdKm4uN7j
+RlgSRaf/Ind46vMCm3N2sgwxu/g3bnooW+db0iLo13zzuvyn727Q3UDQ0MmZcEWM
+QIDAQAB
+-----END PUBLIC KEY-----`;
+
+/** 爱发电 Webhook 验签：RSA-SHA256 + PKCS1v15，原文 = out_trade_no+user_id+plan_id+total_amount（order 内 sign 字段） */
+export function verifyAfdianWebhookSign(order, publicKeyPem = AFDIAN_WEBHOOK_PUBLIC_KEY) {
+  const sign = String((order && order.sign) || '');
+  if (!sign) return false;
+  const msg = String(order.out_trade_no || '') + String(order.user_id || '') +
+    String(order.plan_id || '') + String(order.total_amount || '');
+  try {
+    const verifier = crypto.createVerify('sha256');
+    verifier.update(msg, 'utf8');
+    return verifier.verify(
+      { key: publicKeyPem, padding: crypto.constants.RSA_PKCS1_PADDING },
+      Buffer.from(sign, 'base64')
+    );
+  } catch (err) {
+    console.error('[AFDIAN-VERIFY-ERR]', err && err.message, 'keyLen=', String(publicKeyPem || '').length, 'signLen=', sign.length, 'msg=', msg);
+    return false;
+  }
+}
 export function verifyBreadSignature(secret, body, signature) {
   if (!secret || !signature) return false;
   const expected = hmacHex(secret, body);
@@ -487,22 +517,11 @@ export function createLicenseService(store, config = {}) {
     const body = payload || {};
     const data = body.data;
     if (!data || typeof data !== 'object') throw Object.assign(new Error('回调格式错误'), { status: 400 });
-    // 验签
-    if (!cfg.afdianToken) throw Object.assign(new Error('服务端未配置爱发电 Token'), { status: 500 });
-    const sign = String(body.sign || '');
-    const ts = String(body.ts ?? '');
-    if (md5Hex(ts + cfg.afdianToken + JSON.stringify(data)) !== sign) {
-      // 诊断日志：输出爱发电请求体与各候选验签结果，用于校准算法
-      try {
-        console.error('[AFDIAN] sign-fail ts=' + ts + ' sign=' + sign +
-          ' exp1=' + md5Hex(ts + cfg.afdianToken + JSON.stringify(data)) +
-          ' exp2=' + md5Hex(ts + cfg.afdianToken + md5Hex(JSON.stringify(data))) +
-          ' exp3=' + md5Hex(ts + cfg.afdianToken) +
-          ' body=' + JSON.stringify(body).slice(0, 2000));
-      } catch (e) { /* ignore */ }
+    const order = data.order || {};
+    // 验签：RSA-SHA256（order.sign），2025-07-01 起爱发电携带；无 sign 一律拒绝
+    if (!verifyAfdianWebhookSign(order, cfg.afdianWebhookPublicKey || undefined)) {
       throw Object.assign(new Error('签名校验失败'), { status: 401 });
     }
-    const order = data.order || {};
     const outTradeNo = String(order.out_trade_no || '');
     const planId = String(order.plan_id || '').trim();
     const remark = String(order.remark || '').trim();

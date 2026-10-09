@@ -1,0 +1,14 @@
+nonebot/adapters/afdian/__init__.py,sha256=W8jB81eNKkHjNo9jZ7rGNCR815JpNQFa2yZGlgORApw,271
+nonebot/adapters/afdian/adapter.py,sha256=2XdnoqTcKwFaYQzz5yIwQcflUacqN9gonEbdqup1Mp4,12089
+nonebot/adapters/afdian/bot.py,sha256=kBAxe-g3CatwmvQsXDrr00xcvGi4LZUD8B0XjBy4fUs,8036
+nonebot/adapters/afdian/config.py,sha256=UazW10N9iitmT2osIFZtShLOBUZerQJWyh5ja4AlcYs,440
+nonebot/adapters/afdian/event.py,sha256=rYvAvD4FpgEGM_8Z4Z7IeqJKD41WXsVwXElZXYUX4qg,1872
+nonebot/adapters/afdian/exception.py,sha256=Cu_gXxAiGl4V8JrQajZkbEIW5eWCyRBxPObp4tbuxvk,2255
+nonebot/adapters/afdian/message.py,sha256=kbX-8qdLxHCclXZ7r1wygm-xDabqlIvgiYc6fWJEZ9s,802
+nonebot/adapters/afdian/payload.py,sha256=vC5OAP31k06vG0cL4GaZHQWEqjyeds7WjA3A6T1JQP4,10048
+nonebot/adapters/afdian/signature.py,sha256=8Ms7rtEAWB5LdBprsFuvqUVwLyNJfoN_M4wULyHcgUQ,2010
+nonebot/adapters/afdian/utils.py,sha256=Lfp2WMW6PJ5AsyP6nvIL_VH9uGUCWaL1N5Boh0wuylo,2373
+nonebot_adapter_afdian-0.2.1.dist-info/METADATA,sha256=6yIKsWSH_lIleAHDk9c_EyXey7T7qofxHIPKEOnEhG4,3967
+nonebot_adapter_afdian-0.2.1.dist-info/WHEEL,sha256=zOwg4jB6zX2kU910N-cMawjivD6tO8NEWvE12je1bVk,87
+nonebot_adapter_afdian-0.2.1.dist-info/licenses/LICENSE,sha256=AO4ssPCOYtyESOBX4yB-idsApC-prHdTlIjwa4BC1XQ,1075
+nonebot_adapter_afdian-0.2.1.dist-info/RECORD,,
